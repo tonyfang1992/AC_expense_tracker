@@ -24,6 +24,9 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/new', (req, res) => {
+  return res.render('new')
+})
 
 app.listen(port, () => {
   console.log(`the web is running on http://localhost:${port}`)
