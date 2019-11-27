@@ -1,4 +1,4 @@
-<form>
+<form action="/records" method="POST">
 
 
     <div class="form-group row col-md-12 container">
@@ -12,7 +12,7 @@
     <div class="form-group container row text-right col-md-12">
         <label for="inputPassword" class="col-md-4 col-form-label">名稱* :</label>
 
-        <input type="password" class="form-control col-md-4" id="inputPassword">
+        <input type="text" class="form-control col-md-4" name="name" id="inputPassword">
 
         <div class="container col-md-4"></div>
     </div>
@@ -21,7 +21,7 @@
 
     <div class="input-group container row col-md-12 form-group date" id="datetimepicker4" data-target-input="nearest">
         <label for="select_date" class="col-md-4 text-right">日期* :</label>
-        <input type="text" class="form-control datetimepicker-input col-md-4" data-target="#datetimepicker4"
+        <input type="text" class="form-control datetimepicker-input col-md-4" name="date" data-target="#datetimepicker4"
             id="select_date" />
         <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -42,7 +42,7 @@
     <div class="container col-md-12 form-group row">
 
         <label for="exampleFormControlSelect1" class="col-md-4 col-form-label text-right">類別* :</label>
-        <select class="form-control col-md-4" id="exampleFormControlSelect1">
+        <select class="form-control col-md-4" id="exampleFormControlSelect1" name="category">
             <option>家居物業</option>
             <option>交通出行</option>
             <option>休閒娛樂</option>
@@ -56,7 +56,7 @@
     <div class="form-group container row text-right col-md-12">
         <label for="inputPassword" class="col-md-4 col-form-label">金額* :</label>
 
-        <input type="password" class="form-control col-md-4" id="inputPassword">
+        <input type="text" class="form-control col-md-4" name="amount" id="inputPassword">
 
         <div class="container col-md-4"></div>
     </div>
