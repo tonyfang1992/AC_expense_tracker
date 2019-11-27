@@ -25,35 +25,36 @@
     </div>
   </div>
 </div>
-
+{{#each records}}
 <div class="container" style="height: 80px">
   <div class="d-flex row justify-content-center">
     <div class="col-md-3"></div>
     <div class="bg-light row col-md-6">
-      <div class="col-md-2 pl-5" style="height: 80px">
-        <i class="fas fa-utensils fa-3x text-info pt-3"></i>
-      </div>
-
-      <div class="col-md-2" style="height: 80px">
-        <h5 class="pt-3">
-          午餐
-        </h5>
-        <h6>
-          2019/04/23
-        </h6>
+      <div class="col-md-2 pl-2" style="height: 80px">
+        <i class="fas {{{this.category}}} fa-3x text-info pt-3"></i>
       </div>
 
       <div class="col-md-8" style="height: 80px">
-        <h2 class="pt-4 text-right align-middle">
-          60
+        <h5 class="pt-3">
+          {{{this.name}}}
+        </h5>
+        <h6>
+          {{{this.date}}}
+        </h6>
+      </div>
+
+      <div class="col-md-2" style="height: 80px">
+        <h2 class="pt-4 text-left align-middle">
+          {{{this.amount}}}
         </h2>
       </div>
     </div>
     <div class="col-md-3">
-      <a href="/todos/{{{this.id}}}/edit" class="btn mt-4">修改</a>
-      <form action="/todos/{{{this.id}}}/delete?_method=DELETE" method="post" style="display:inline">
+      <a href="/todos//edit" class="btn mt-4">修改</a>
+      <form action="/todos//delete?_method=DELETE" method="post" style="display:inline">
         <button type="submit" class="btn mt-4">刪除</button>
       </form>
     </div>
   </div>
 </div>
+{{/each}}

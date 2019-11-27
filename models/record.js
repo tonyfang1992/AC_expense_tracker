@@ -20,4 +20,4 @@ const recordSchema = new Schema({
   }
 })
 
-module.exports = mongoose.model('recoed', recordSchema)
+module.exports = mongoose.model('Record', recordSchema)
