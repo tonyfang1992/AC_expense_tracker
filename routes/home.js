@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../models/record')
+const { authenticated } = require('../config/auth')
 
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   let totalAmount = Number(0)
   Record.find((err, records) => {
     for (let i = 0; i < records.length; i++) {
