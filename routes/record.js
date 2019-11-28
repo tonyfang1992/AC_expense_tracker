@@ -4,7 +4,7 @@ const Record = require('../models/record')
 const { authenticated } = require('../config/auth')
 
 
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   return res.render('new')
 })
 //新增
