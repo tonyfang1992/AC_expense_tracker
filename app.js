@@ -4,10 +4,13 @@ const mongoose = require('mongoose')
 const port = 3000
 const exphbs = require('express-handlebars')
 const Record = require('./models/record')
+const methodOverride = require('method-override')
+
 // 引用 body-parser
 const bodyParser = require('body-parser')
 // 設定 bodyParser
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -36,6 +39,7 @@ app.get('/', (req, res) => {
 app.get('/records/new', (req, res) => {
   return res.render('new')
 })
+//新增
 app.post('/records', (req, res) => {
   let icon = ''
   if (req.body.category === '家居物業') {
@@ -116,7 +120,7 @@ app.get('/records/fa-pen', (req, res) => {
   })
 })
 
-app.post('/records/:id/edit', (req, res) => {
+app.put('/records/:id/edit', (req, res) => {
   let icon = ''
   if (req.body.category === '家居物業') {
     icon += 'fa-home'
@@ -177,7 +181,7 @@ app.get('/records/:id/edit', (req, res) => {
   })
 })
 
-app.post('/records/:id/delete', (req, res) => {
+app.delete('/records/:id/delete', (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.remove(err => {
