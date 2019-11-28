@@ -10,6 +10,7 @@ const Record = require('./models/record')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
+const flash = require('connect-flash')
 
 // 引用 body-parser
 const bodyParser = require('body-parser')
@@ -37,7 +38,7 @@ db.once('open', () => {
 //使用passport
 app.use(passport.initialize())
 app.use(passport.session())
-
+app.use(flash())
 // 載入 Passport config
 require('./config/passport')(passport)
 // 登入後可以取得使用者的資訊方便我們在 view 裡面直接使用
@@ -48,8 +49,12 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.isAuthenticated = req.isAuthenticated()      // 辨識使用者是否已經登入的變數，讓 view 可以使用
+  // 新增兩個 flash message 變數 
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
+
 
 
 app.use('/', require('./routes/home'))
