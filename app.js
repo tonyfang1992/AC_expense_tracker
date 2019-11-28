@@ -36,6 +36,35 @@ app.get('/', (req, res) => {
 app.get('/records/new', (req, res) => {
   return res.render('new')
 })
+app.post('/records', (req, res) => {
+  let icon = ''
+  if (req.body.category === '家居物業') {
+    icon += 'fa-home'
+  }
+  if (req.body.category === '交通出行') {
+    icon += 'fa-shuttle-van'
+  }
+  if (req.body.category === '休閒娛樂') {
+    icon += 'fa-grin-beam'
+  }
+  if (req.body.category === '餐飲食品') {
+    icon += 'fa-utensils'
+  }
+  if (req.body.category === '其他') {
+    icon += 'fa-pen'
+  }
+  const record = new Record({
+    name: req.body.name,
+    category: icon,
+    date: req.body.date,
+    amount: req.body.amount
+  })
+  record.save(err => {
+    if (err) return console.error(err)
+    return res.redirect('/')
+  })
+})
+
 app.get('/records/fa-home', (req, res) => {
   let totalAmount = Number(0)
   Record.find({ category: 'fa-home' }, (err, records) => {
