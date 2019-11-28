@@ -5,12 +5,18 @@ const port = 3000
 const exphbs = require('express-handlebars')
 const Record = require('./models/record')
 const methodOverride = require('method-override')
+const session = require('express-session')
 
 // 引用 body-parser
 const bodyParser = require('body-parser')
 // 設定 bodyParser
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use(session({
+  secret: 'your secret key',   // secret: 定義一組屬於你的字串做為私鑰
+  resave: false,
+  saveUninitialized: true,
+}))
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')

@@ -33,7 +33,7 @@ router.post('/register', (req, res) => {
       newUser
         .save()
         .then(user => {
-          res.redirect('/')                         // 新增完成導回首頁
+          res.redirect('/')
         })
         .catch(err => console.log(err))
     }
