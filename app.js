@@ -23,9 +23,11 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected!')
 })
+//登入
 
 
 app.use('/', require('./routes/home'))
+app.use('/users', require('./routes/user'))
 app.use('/records', require('./routes/record'))
 
 app.listen(port, () => {
