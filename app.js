@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+if (process.env.NODE_ENV !== 'production') {      // 如果不是 production 模式
+  require('dotenv').config()                      // 使用 dotenv 讀取 .env 檔案
+}
 const mongoose = require('mongoose')
 const port = 3000
 const exphbs = require('express-handlebars')
@@ -52,6 +55,7 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/home'))
 app.use('/users', require('./routes/user'))
 app.use('/records', require('./routes/record'))
+app.use('/auth', require('./routes/auths'))
 
 app.listen(port, () => {
   console.log(`the web is running on http://localhost:${port}`)
