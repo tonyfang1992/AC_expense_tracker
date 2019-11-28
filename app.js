@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars')
 const Record = require('./models/record')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const passport = require('passport')
 
 // 引用 body-parser
 const bodyParser = require('body-parser')
@@ -29,7 +30,18 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected!')
 })
-//登入
+
+//使用passport
+app.use(passport.initialize())
+app.use(passport.session())
+
+// 載入 Passport config
+require('./config/passport')(passport)
+// 登入後可以取得使用者的資訊方便我們在 view 裡面直接使用
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 
 
 app.use('/', require('./routes/home'))
