@@ -57,7 +57,7 @@ app.get('/records/fa-pen', (req, res) => {
   })
 })
 
-app.post('/records', (req, res) => {
+app.post('/records/:id/edit', (req, res) => {
   let icon = ''
   if (req.body.category === '家居物業') {
     icon += 'fa-home'
@@ -74,15 +74,16 @@ app.post('/records', (req, res) => {
   if (req.body.category === '其他') {
     icon += 'fa-pen'
   }
-  const record = Record({
-    name: req.body.name,
-    category: icon,
-    date: req.body.date,
-    amount: req.body.amount
-  })
-  record.save(err => {
+  Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
-    return res.redirect('/')
+    record.name = req.body.name
+    record.category = icon
+    record.date = req.body.date
+    record.amount = req.body.amount
+    record.save(err => {
+      if (err) return console.error(err)
+      return res.redirect('/')
+    })
   })
 })
 
