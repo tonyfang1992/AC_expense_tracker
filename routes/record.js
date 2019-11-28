@@ -29,17 +29,18 @@ router.post('/', authenticated, (req, res) => {
     name: req.body.name,
     category: icon,
     date: req.body.date,
-    amount: req.body.amount
+    amount: req.body.amount,
+    userId: req.user._id
   })
   record.save(err => {
     if (err) return console.error(err)
     return res.redirect('/')
   })
 })
-
+//分類
 router.get('/fa-home', authenticated, (req, res) => {
   let totalAmount = Number(0)
-  Record.find({ category: 'fa-home' }, (err, records) => {
+  Record.find({ category: 'fa-home', userId: req.user._id }, (err, records) => {
     for (let i = 0; i < records.length; i++) {
       totalAmount += Number(records[i].amount)
       console.log(totalAmount)
@@ -49,7 +50,7 @@ router.get('/fa-home', authenticated, (req, res) => {
 })
 router.get('/fa-shuttle-van', authenticated, (req, res) => {
   let totalAmount = Number(0)
-  Record.find({ category: 'fa-shuttle-van' }, (err, records) => {
+  Record.find({ category: 'fa-shuttle-van', userId: req.user._id }, (err, records) => {
     for (let i = 0; i < records.length; i++) {
       totalAmount += Number(records[i].amount)
       console.log(totalAmount)
@@ -59,7 +60,7 @@ router.get('/fa-shuttle-van', authenticated, (req, res) => {
 })
 router.get('/fa-grin-beam', authenticated, (req, res) => {
   let totalAmount = Number(0)
-  Record.find({ category: 'fa-grin-beam' }, (err, records) => {
+  Record.find({ category: 'fa-grin-beam', userId: req.user._id }, (err, records) => {
     for (let i = 0; i < records.length; i++) {
       totalAmount += Number(records[i].amount)
       console.log(totalAmount)
@@ -69,7 +70,7 @@ router.get('/fa-grin-beam', authenticated, (req, res) => {
 })
 router.get('/fa-utensils', authenticated, (req, res) => {
   let totalAmount = Number(0)
-  Record.find({ category: 'fa-utensils' }, (err, records) => {
+  Record.find({ category: 'fa-utensils', userId: req.user._id }, (err, records) => {
     for (let i = 0; i < records.length; i++) {
       totalAmount += Number(records[i].amount)
       console.log(totalAmount)
@@ -79,7 +80,7 @@ router.get('/fa-utensils', authenticated, (req, res) => {
 })
 router.get('/fa-pen', authenticated, (req, res) => {
   let totalAmount = Number(0)
-  Record.find({ category: 'fa-pen' }, (err, records) => {
+  Record.find({ category: 'fa-pen', userId: req.user._id }, (err, records) => {
     for (let i = 0; i < records.length; i++) {
       totalAmount += Number(records[i].amount)
       console.log(totalAmount)
@@ -87,7 +88,7 @@ router.get('/fa-pen', authenticated, (req, res) => {
     return res.render('fa-pen', { records: records, totalAmount: totalAmount })
   })
 })
-
+//修改
 router.put('/:id/edit', authenticated, (req, res) => {
   let icon = ''
   if (req.body.category === '家居物業') {
@@ -105,7 +106,7 @@ router.put('/:id/edit', authenticated, (req, res) => {
   if (req.body.category === '其他') {
     icon += 'fa-pen'
   }
-  Record.findById(req.params.id, (err, record) => {
+  Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
     if (err) return console.error(err)
     record.name = req.body.name
     record.category = icon
@@ -128,7 +129,7 @@ router.get('/:id/edit', authenticated, (req, res) => {
     pen: ''
   })
 
-  Record.findById(req.params.id, (err, record) => {
+  Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
     if (record.category === 'fa-home') {
       select.home += 'select'
     }
@@ -150,7 +151,7 @@ router.get('/:id/edit', authenticated, (req, res) => {
 })
 
 router.delete('/:id/delete', authenticated, (req, res) => {
-  Record.findById(req.params.id, (err, record) => {
+  Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
     if (err) return console.error(err)
     record.remove(err => {
       if (err) return console.error(err)

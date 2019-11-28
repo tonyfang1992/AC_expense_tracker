@@ -22,7 +22,7 @@ app.use(session({
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 const db = mongoose.connection
 db.on('error', () => {
   console.log('mongodb error!')

@@ -5,7 +5,7 @@ const { authenticated } = require('../config/auth')
 
 router.get('/', authenticated, (req, res) => {
   let totalAmount = Number(0)
-  Record.find((err, records) => {
+  Record.find({ userId: req.user._id }, (err, records) => {
     for (let i = 0; i < records.length; i++) {
       totalAmount += Number(records[i].amount)
       console.log(totalAmount)
