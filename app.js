@@ -22,9 +22,14 @@ db.once('open', () => {
 })
 
 app.get('/', (req, res) => {
+  let totalAmount = Number(0)
   Record.find((err, records) => {
+    for (let i = 0; i < records.length; i++) {
+      totalAmount += Number(records[i].amount)
+      console.log(totalAmount)
+    }
     if (err) return console.error(err)
-    return res.render('index', { records: records })
+    return res.render('index', { records: records, totalAmount: totalAmount })
   })
 })
 
@@ -32,28 +37,53 @@ app.get('/records/new', (req, res) => {
   return res.render('new')
 })
 app.get('/records/fa-home', (req, res) => {
+  let totalAmount = Number(0)
   Record.find({ category: 'fa-home' }, (err, records) => {
-    return res.render('fa-home', { records: records })
+    for (let i = 0; i < records.length; i++) {
+      totalAmount += Number(records[i].amount)
+      console.log(totalAmount)
+    }
+    return res.render('fa-home', { records: records, totalAmount: totalAmount })
   })
 })
 app.get('/records/fa-shuttle-van', (req, res) => {
+  let totalAmount = Number(0)
   Record.find({ category: 'fa-shuttle-van' }, (err, records) => {
-    return res.render('fa-shuttle-van', { records: records })
+    for (let i = 0; i < records.length; i++) {
+      totalAmount += Number(records[i].amount)
+      console.log(totalAmount)
+    }
+    return res.render('fa-shuttle-van', { records: records, totalAmount: totalAmount })
   })
 })
 app.get('/records/fa-grin-beam', (req, res) => {
+  let totalAmount = Number(0)
   Record.find({ category: 'fa-grin-beam' }, (err, records) => {
-    return res.render('fa-grin-beam', { records: records })
+    for (let i = 0; i < records.length; i++) {
+      totalAmount += Number(records[i].amount)
+      console.log(totalAmount)
+    }
+    return res.render('fa-grin-beam', { records: records, totalAmount: totalAmount })
   })
 })
 app.get('/records/fa-utensils', (req, res) => {
+  let totalAmount = Number(0)
   Record.find({ category: 'fa-utensils' }, (err, records) => {
-    return res.render('fa-utensils', { records: records })
+    for (let i = 0; i < records.length; i++) {
+      totalAmount += Number(records[i].amount)
+      console.log(totalAmount)
+    }
+    return res.render('fa-utensils', { records: records, totalAmount: totalAmount })
   })
 })
 app.get('/records/fa-pen', (req, res) => {
+  let totalAmount = Number(0)
   Record.find({ category: 'fa-pen' }, (err, records) => {
-    return res.render('fa-pen', { records: records })
+    for (let i = 0; i < records.length; i++) {
+      totalAmount += Number(records[i].amount)
+      console.log(totalAmount)
+    }
+    return res.render('fa-pen', { records: records, totalAmount: totalAmount })
   })
 })
 
