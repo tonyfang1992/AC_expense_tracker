@@ -26,7 +26,7 @@ app.use(session({
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/record', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 const db = mongoose.connection
 db.on('error', () => {
   console.log('mongodb error!')
@@ -62,6 +62,6 @@ app.use('/users', require('./routes/user'))
 app.use('/records', require('./routes/record'))
 app.use('/auth', require('./routes/auths'))
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`the web is running on http://localhost:${port}`)
 })
