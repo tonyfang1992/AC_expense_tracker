@@ -40,7 +40,9 @@ router.post('/', authenticated, (req, res) => {
 //分類
 router.get('/fa-home', authenticated, (req, res) => {
   let totalAmount = Number(0)
-  Record.find({ category: 'fa-home', userId: req.user._id }, (err, records) => {
+  console.log(req.query.Month)
+  console.log(req.query.classification)
+  Record.find({ category: `${req.query.classification}`, userId: req.user._id }, (err, records) => {
     for (let i = 0; i < records.length; i++) {
       totalAmount += Number(records[i].amount)
       console.log(totalAmount)
@@ -74,6 +76,7 @@ router.get('/fa-utensils', authenticated, (req, res) => {
     for (let i = 0; i < records.length; i++) {
       totalAmount += Number(records[i].amount)
       console.log(totalAmount)
+      console.log(typeof records[i].date)
     }
     return res.render('fa-utensils', { records: records, totalAmount: totalAmount })
   })

@@ -1,19 +1,36 @@
-<div class="container">
-  <div class="dropdown text-center mt-3">
-    <a class="btn btn-secondary dropdown-toggle col-md-6 bg-white text-dark" href="#" role="button"
-      id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      類別
-    </a>
+<form action="/records/fa-home" method="GET">
+  <div class="container mt-3">
+    <div class="d-flex row justify-content-center">
+      <div class="col-md-3">
+        <select name="Month" id="">
+          <option value="January">一月</option>
+          <option value="February">二月</option>
+          <option value="March">三月</option>
+          <option value="April">四月</option>
+          <option value="May">五月</option>
+          <option value="June">六月</option>
+          <option value="July">七月</option>
+          <option value="August">八月</option>
+          <option value="September">九月</option>
+          <option value="October">十月</option>
+          <option value="November">十一月</option>
+          <option value="December">十二月</option>
+        </select>
 
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <a class="dropdown-item" href="/records/fa-home">家居物業</a>
-      <a class="dropdown-item" href="/records/fa-shuttle-van">交通出行</a>
-      <a class="dropdown-item" href="/records/fa-grin-beam">休閒娛樂</a>
-      <a class="dropdown-item" href="/records/fa-utensils">餐飲食品</a>
-      <a class="dropdown-item" href="/records/fa-pen">其他</a>
+        <select name="classification" id="" class="ml-2">
+          <option value="fa-home">家居物業</option>
+          <option value="fa-shuttle-van">交通出行</option>
+          <option value="fa-grin-beam">休閒娛樂</option>
+          <option value="fa-utensils">餐飲食品</option>
+          <option value="fa-pen">其他</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <button type="submit">搜尋</button>
+      </div>
     </div>
   </div>
-</div>
+</form>
 
 <div class="container mt-3">
   <div class="d-flex row justify-content-center">
