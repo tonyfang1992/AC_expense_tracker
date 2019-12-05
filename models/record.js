@@ -6,11 +6,18 @@ const recordSchema = new Schema({
     type: String,
     required: true
   },
+  merchant: {
+    type: String
+  },
   category: {
     type: String,
     required: true
   },
   date: {
+    type: String,
+    required: true
+  },
+  month: {
     type: String,
     required: true
   },
