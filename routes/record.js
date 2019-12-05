@@ -38,7 +38,7 @@ router.post('/', authenticated, (req, res) => {
   })
 })
 //分類
-router.get('/fa-home', authenticated, (req, res) => {
+router.get('/search', authenticated, (req, res) => {
   let totalAmount = Number(0)
   console.log(req.query.Month)
   console.log(req.query.classification)
@@ -47,50 +47,10 @@ router.get('/fa-home', authenticated, (req, res) => {
       totalAmount += Number(records[i].amount)
       console.log(totalAmount)
     }
-    return res.render('fa-home', { records: records, totalAmount: totalAmount })
+    return res.render('index', { records: records, totalAmount: totalAmount })
   })
 })
-router.get('/fa-shuttle-van', authenticated, (req, res) => {
-  let totalAmount = Number(0)
-  Record.find({ category: 'fa-shuttle-van', userId: req.user._id }, (err, records) => {
-    for (let i = 0; i < records.length; i++) {
-      totalAmount += Number(records[i].amount)
-      console.log(totalAmount)
-    }
-    return res.render('fa-shuttle-van', { records: records, totalAmount: totalAmount })
-  })
-})
-router.get('/fa-grin-beam', authenticated, (req, res) => {
-  let totalAmount = Number(0)
-  Record.find({ category: 'fa-grin-beam', userId: req.user._id }, (err, records) => {
-    for (let i = 0; i < records.length; i++) {
-      totalAmount += Number(records[i].amount)
-      console.log(totalAmount)
-    }
-    return res.render('fa-grin-beam', { records: records, totalAmount: totalAmount })
-  })
-})
-router.get('/fa-utensils', authenticated, (req, res) => {
-  let totalAmount = Number(0)
-  Record.find({ category: 'fa-utensils', userId: req.user._id }, (err, records) => {
-    for (let i = 0; i < records.length; i++) {
-      totalAmount += Number(records[i].amount)
-      console.log(totalAmount)
-      console.log(typeof records[i].date)
-    }
-    return res.render('fa-utensils', { records: records, totalAmount: totalAmount })
-  })
-})
-router.get('/fa-pen', authenticated, (req, res) => {
-  let totalAmount = Number(0)
-  Record.find({ category: 'fa-pen', userId: req.user._id }, (err, records) => {
-    for (let i = 0; i < records.length; i++) {
-      totalAmount += Number(records[i].amount)
-      console.log(totalAmount)
-    }
-    return res.render('fa-pen', { records: records, totalAmount: totalAmount })
-  })
-})
+
 //修改
 router.put('/:id/edit', authenticated, (req, res) => {
   let icon = ''
