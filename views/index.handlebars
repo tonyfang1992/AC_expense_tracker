@@ -3,18 +3,19 @@
     <div class="d-flex row justify-content-center">
       <div class="col-md-3">
         <select name="Month">
-          <option value="January">一月</option>
-          <option value="February">二月</option>
-          <option value="March">三月</option>
-          <option value="April">四月</option>
-          <option value="May">五月</option>
-          <option value="June">六月</option>
-          <option value="July">七月</option>
-          <option value="August">八月</option>
-          <option value="September">九月</option>
-          <option value="October">十月</option>
-          <option value="November">十一月</option>
-          <option value="December">十二月</option>
+          <option value="all">月份</option>
+          <option value="1">一月</option>
+          <option value="2">二月</option>
+          <option value="3">三月</option>
+          <option value="4">四月</option>
+          <option value="5">五月</option>
+          <option value="6">六月</option>
+          <option value="7">七月</option>
+          <option value="8">八月</option>
+          <option value="9">九月</option>
+          <option value="10">十月</option>
+          <option value="11">十一月</option>
+          <option value="12">十二月</option>
         </select>
 
         <select name="classification" class="ml-2">
@@ -53,7 +54,7 @@
 
       <div class="col-md-8" style="height: 80px">
         <h5 class="pt-3">
-          {{{this.name}}}
+          {{{this.name}}}{{#if this.merchant}}, from:{{{this.merchant}}} {{/if}}
         </h5>
         <h6>
           {{{this.date}}}

@@ -10,6 +10,7 @@ router.get('/new', authenticated, (req, res) => {
 //新增
 router.post('/', authenticated, (req, res) => {
   let icon = ''
+  let monthofdate = ''
   if (req.body.category === '家居物業') {
     icon += 'fa-home'
   }
@@ -25,12 +26,15 @@ router.post('/', authenticated, (req, res) => {
   if (req.body.category === '其他') {
     icon += 'fa-pen'
   }
+  monthofdate += req.body.date[0] + req.body.date[1]
   const record = new Record({
     name: req.body.name,
     category: icon,
     date: req.body.date,
     amount: req.body.amount,
-    userId: req.user._id
+    userId: req.user._id,
+    month: monthofdate,
+    merchant: req.body.merchant
   })
   record.save(err => {
     if (err) return console.error(err)
@@ -42,13 +46,24 @@ router.get('/search', authenticated, (req, res) => {
   let totalAmount = Number(0)
   console.log(req.query.Month)
   console.log(req.query.classification)
-  Record.find({ category: `${req.query.classification}`, userId: req.user._id }, (err, records) => {
-    for (let i = 0; i < records.length; i++) {
-      totalAmount += Number(records[i].amount)
-      console.log(totalAmount)
-    }
-    return res.render('index', { records: records, totalAmount: totalAmount })
-  })
+  if (req.query.Month === 'all') {
+    Record.find({ category: `${req.query.classification}`, userId: req.user._id }, (err, records) => {
+      for (let i = 0; i < records.length; i++) {
+        totalAmount += Number(records[i].amount)
+        console.log(totalAmount)
+      }
+      return res.render('index', { records: records, totalAmount: totalAmount })
+    })
+  }
+  else {
+    Record.find({ month: `${req.query.Month}`, category: `${req.query.classification}`, userId: req.user._id }, (err, records) => {
+      for (let i = 0; i < records.length; i++) {
+        totalAmount += Number(records[i].amount)
+        console.log(totalAmount)
+      }
+      return res.render('index', { records: records, totalAmount: totalAmount })
+    })
+  }
 })
 
 //修改
