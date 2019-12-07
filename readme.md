@@ -35,7 +35,7 @@ $ npm run dev
 
 ### 網頁功能
 建立專屬的記帳功能。
-![image](https://github.com/tonyfang1992/AC_expense_tracker/blob/master/expense-tracker.png)
+![image](https://github.com/tonyfang1992/AC_expense_tracker/blob/master/expense-tracker_01.png)
 
 ## Authors
 
